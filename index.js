@@ -1,11 +1,10 @@
 import express from 'express';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
 import cors from 'cors';
 
 import * as WaiterController from './controllers/WaiterController.js';
 import * as AdminController from './controllers/AdminController.js';
+import * as TipsController from './controllers/TipsController.js';
 
 mongoose.connect('mongodb+srv://LateBloomer:20010ovvoO@tips.jfoguii.mongodb.net/tips?retryWrites=true&w=majority')
   .then(() => console.log('DB OK'))
@@ -26,6 +25,9 @@ app.get('/admin', AdminController.getAll);
 app.post('/login', AdminController.login);
 app.post('/admin', AdminController.create);
 app.delete('/admin/:id', AdminController.remove);
+
+// ----------------------- TIPS -----------------------
+app.post('/tips', TipsController.sendData);
 
 app.listen(666, (err) => {
   if (err) {
